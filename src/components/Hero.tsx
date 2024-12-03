@@ -6,6 +6,21 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ language }) => {
+  const handleCalculatorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.querySelector('#calculator');
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const content = {
     ru: {
       title: "Страхование ОСАГО",
@@ -120,6 +135,7 @@ const Hero: React.FC<HeroProps> = ({ language }) => {
               >
                 <a
                   href="#calculator"
+                  onClick={handleCalculatorClick}
                   className="rounded-xl bg-white px-8 py-4 text-lg font-semibold text-blue-600 shadow-lg hover:bg-blue-50 transition-colors duration-200"
                 >
                   {t.cta}

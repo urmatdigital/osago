@@ -11,7 +11,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem; /* Для учета фиксированного хедера */
+  scroll-padding-top: 5rem; /* 80px для учета высоты хедера */
 }
 
 @layer base {

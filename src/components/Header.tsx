@@ -32,7 +32,22 @@ export default function Header({ language, onLanguageChange }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = translations[language];
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        const headerOffset = 80; // Высота header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
     setIsMenuOpen(false);
   };
 
@@ -164,7 +179,7 @@ export default function Header({ language, onLanguageChange }: HeaderProps) {
             <button
               onClick={() => {
                 onLanguageChange();
-                handleNavClick();
+                handleNavClick({} as React.MouseEvent<HTMLAnchorElement>);
               }}
               className="w-full px-4 py-2 text-center bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-200"
             >
