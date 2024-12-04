@@ -48,7 +48,6 @@ const VideoSection = ({ language }: VideoSectionProps) => {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-blue-600/20 mix-blend-overlay"></div>
         <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-white/10 to-transparent"></div>
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       </div>
       
       <div className="relative container mx-auto px-4 py-16 md:py-24">

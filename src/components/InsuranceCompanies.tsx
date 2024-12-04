@@ -16,6 +16,7 @@ interface InsuranceCompany {
   phones: string[];
   mainOffice: string;
   branches: Branch[];
+  website: string;
 }
 
 interface InsuranceCompaniesProps {
@@ -59,7 +60,8 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "ул. Орозбекова 1",
         phone: ["0 (3655) 5-15-58"]
       }
-    ]
+    ],
+    website: "https://gos.kg"
   },
   {
     id: 2,
@@ -87,7 +89,8 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "ул. Ибраимова, 108",
         phone: ["+996 995 888 180", "+996 312 888 180"]
       }
-    ]
+    ],
+    website: "https://nsc.kg"
   },
   {
     id: 3,
@@ -110,7 +113,8 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "ул. Бердике-Баатыра 287",
         phone: ["+996 774 61 11 18", "+996 3422 5 64 44", "+996 554 61 11 18"]
       }
-    ]
+    ],
+    website: "https://insurance.kg"
   },
   {
     id: 4,
@@ -133,7 +137,8 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "автовокзал",
         phone: ["+996 550 29 90 09"]
       }
-    ]
+    ],
+    website: "https://aiugarant.kg"
   },
   {
     id: 5,
@@ -151,14 +156,16 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "бульвар Эркиндик 21",
         phone: ["+996 312 97-67-97", "+996 555 66-04-50"]
       }
-    ]
+    ],
+    website: "https://jubilee.kg"
   },
   {
     id: 6,
     name: "ЗАО СК «Алма Иншуренс»",
     phones: ["0(312) 43-33-33", "+996 509 372037"],
     mainOffice: "г. Бишкек, ул. Огонбаева, 222 (пересекает ул. Ибраимова)",
-    branches: []
+    branches: [],
+    website: "https://alma.kg"
   },
   {
     id: 7,
@@ -171,63 +178,72 @@ const insuranceCompanies: InsuranceCompany[] = [
         address: "ул. Курманжан-Датка 244/3",
         phone: ["+996 (3222) 77-027", "+996 555 255-289"]
       }
-    ]
+    ],
+    website: "https://atn.kg"
   },
   {
     id: 8,
     name: "ЗАО СК «Арсеналъ-Кыргызстан»",
     phones: ["0(312) 39-82-78", "0(312) 39 82 24", "+996 706 98 56 56", "+996 999 12 21 36"],
     mainOffice: "г. Бишкек, ул. Орозбекова, 26 (пересекает ул. Московская)",
-    branches: []
+    branches: [],
+    website: "https://arsenal.kg"
   },
   {
     id: 9,
     name: "ЗАО «САКБОЛ»",
     phones: ["0(312) 31-66-01", "0(312) 31-66-02"],
     mainOffice: "г. Бишкек, ул. Исанова, 1/5, 7 этаж (пересекает ул. Боконбаева)",
-    branches: []
+    branches: [],
+    website: "https://sakbol.kg"
   },
   {
     id: 10,
     name: "ЗАО СК «А Плюс»",
     phones: ["0(312) 90-15-33", "+996 704 93 73 78", "+996 555 93 73 78"],
     mainOffice: "г. Бишкек, ул. Абдрахманова 176/1 (пересекает ул. Киевская)",
-    branches: []
+    branches: [],
+    website: "https://a-plus.kg"
   },
   {
     id: 11,
     name: "ЗАО СК «Али-Гарант»",
     phones: ["996 558 90 05 22"],
     mainOffice: "г. Бишкек, ул. Жумабека 105/1",
-    branches: []
+    branches: [],
+    website: "https://ali-garant.kg"
   },
   {
     id: 12,
     name: "ЗАО СК «Здоровье»",
     phones: ["996 770 70 11 71"],
     mainOffice: "г. Бишкек, ул. Тыныстанова 138",
-    branches: []
+    branches: [],
+    website: "https://zdorovye.kg"
   },
   {
     id: 13,
     name: "ЗАО «Дордой-Страхование»",
     phones: ["996 709 06 07 09"],
     mainOffice: "г. Бишкек, Кожевенная 1",
-    branches: []
+    branches: [],
+    website: "https://dordoi.kg"
   },
   {
     id: 14,
     name: "ЗАО «Ингосстрах»",
     phones: ["996 (312) 98 67 68"],
     mainOffice: "г. Бишкек, пр. Чуй 219",
-    branches: []
+    branches: [],
+    website: "https://ingosstrakh.kg"
   },
   {
     id: 15,
     name: "ЗАО «Бакай Иншуренс»",
     phones: ["996 555 301 530"],
     mainOffice: "г. Бишкек, ул. Турусбекова 109/1, 1-Этаж, 116-Офис",
-    branches: []
+    branches: [],
+    website: "https://bakai.kg"
   }
 ];
 
@@ -238,7 +254,7 @@ const translations = {
   },
   kg: {
     title: "Камсыздандыруу компаниялары",
-    description: "ОСАГО тариздөө үчүн ишенимдүү камсыздандыруу компанияны тандаңыз",
+    description: "ОСАГО камсыздандыруу үчүн ишенимдүү камсыздандыруу компанияны тандаңыз",
   }
 };
 
@@ -312,7 +328,14 @@ const InsuranceCompanies = ({ language }: InsuranceCompaniesProps) => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span className="text-gray-600 text-sm">{company.mainOffice}</span>
+                    <a
+                      href={`https://www.google.com/maps/search/${encodeURIComponent(company.mainOffice + ', Бишкек, Кыргызстан')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                    >
+                      {company.mainOffice}
+                    </a>
                   </div>
 
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -321,9 +344,21 @@ const InsuranceCompanies = ({ language }: InsuranceCompaniesProps) => {
                         <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        <span className="text-gray-600 text-sm">{phone}</span>
+                        <a
+                          href={`tel:${phone.replace(/[^\d+]/g, '')}`}
+                          className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                        >
+                          {phone}
+                        </a>
                       </div>
                     ))}
+                  </div>
+
+                  <div className="flex items-center space-x-2 mb-2">
+                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    <a href={company.website} target="_blank" rel="noopener noreferrer" className="text-gray-600 text-sm">{company.website.replace('https://', '')}</a>
                   </div>
 
                   {company.branches.length > 0 && (

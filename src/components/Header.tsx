@@ -15,14 +15,14 @@ const translations = {
   ru: {
     calculator: 'Калькулятор ОСАГО',
     companies: 'Страховые компании',
-    about: 'О системе',
+    about: 'Что такое ОСАГО',
     contacts: 'Контакты',
     langButton: 'KG'
   },
   kg: {
     calculator: 'ОСАГО калькулятору',
     companies: 'Камсыздандыруу компаниялары',
-    about: 'Система жөнүндө',
+    about: 'ОСАГО деген эмне',
     contacts: 'Байланыштар',
     langButton: 'RU'
   }
@@ -38,17 +38,19 @@ export default function Header({ language, onLanguageChange }: HeaderProps) {
     if (href && href.startsWith('#')) {
       const element = document.querySelector(href);
       if (element) {
-        const headerOffset = 80; // Высота header
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        setIsMenuOpen(false); // Close menu first
+        setTimeout(() => {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100); // Small delay to ensure menu is closed
       }
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -61,7 +63,7 @@ export default function Header({ language, onLanguageChange }: HeaderProps) {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center"
           >
-            <Link href="/" className="flex items-center space-x-3 group" onClick={handleNavClick}>
+            <Link href="/" className="flex items-center space-x-3 group" onClick={() => setIsMenuOpen(false)}>
               <div className="w-8 h-8 relative">
                 <Image
                   src="/logo.svg"
@@ -179,7 +181,7 @@ export default function Header({ language, onLanguageChange }: HeaderProps) {
             <button
               onClick={() => {
                 onLanguageChange();
-                handleNavClick({} as React.MouseEvent<HTMLAnchorElement>);
+                setIsMenuOpen(false);
               }}
               className="w-full px-4 py-2 text-center bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-200"
             >

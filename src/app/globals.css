@@ -11,17 +11,20 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem; /* 80px для учета высоты хедера */
+  scroll-padding-top: 80px; /* Exact pixel value for header height */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  min-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
 }
 
 @layer base {
   * {
     @apply border-0;
-  }
-  
-  body {
-    color: rgb(var(--foreground-rgb));
-    background: rgb(var(--background-rgb));
   }
 }
 

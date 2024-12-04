@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import Toast from './Toast';
+
 import {
   BASE_PREMIUM,
   VEHICLE_COEFFICIENTS,
@@ -14,43 +17,49 @@ interface CalculatorProps {
   language: 'ru' | 'kg';
 }
 
+const translations = {
+  ru: {
+    title: "Калькулятор ОСАГО",
+    description: "Рассчитайте стоимость страховки онлайн",
+    vehicleType: "Тип транспортного средства",
+    ageExperience: "Возраст и стаж водителя",
+    diagnosticCard: "Диагностическая карта",
+    insurancePeriod: "Срок страхования",
+    calculate: "Рассчитать",
+    result: "Сумма страховой премии:",
+    som: "сом",
+    tax: "включая 3% налог на продажу",
+    successMessage: 'Ваша заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.',
+    errorMessage: 'Произошла ошибка. Пожалуйста, попробуйте еще раз.',
+  },
+  kg: {
+    title: "ОСАГО калькулятору",
+    description: "Камсыздандыруу наркын онлайн эсептеңиз",
+    vehicleType: "Унаанын түрү",
+    ageExperience: "Айдоочунун жашы жана стажы",
+    diagnosticCard: "Диагностикалык карта",
+    insurancePeriod: "Камсыздандыруу мөөнөтү",
+    calculate: "Эсептөө",
+    result: "Камсыздандыруу сыйлыгынын суммасы:",
+    som: "сом",
+    tax: "3% сатуу салыгын кошкондо",
+    successMessage: 'Сиздин өтүнмөңүз ийгиликтүү жөнөтүлдү! Биз жакын арада сиз менен байланышабыз.',
+    errorMessage: 'Ката кетти. Сураныч, кайра аракет кылыңыз.',
+  }
+};
+
 export default function Calculator({ language }: CalculatorProps) {
   const [vehicleType, setVehicleType] = useState('car_up_to_2000');
   const [ageExperience, setAgeExperience] = useState('adult_experienced');
   const [diagnosticCard, setDiagnosticCard] = useState('yes');
   const [insurancePeriod, setInsurancePeriod] = useState('months_9_12');
   const [premium, setPremium] = useState<number | null>(null);
-
-  const translations = {
-    ru: {
-      title: "Калькулятор ОСАГО",
-      description: "Рассчитайте стоимость страховки онлайн",
-      vehicleType: "Тип транспортного средства",
-      ageExperience: "Возраст и стаж водителя",
-      diagnosticCard: "Диагностическая карта",
-      insurancePeriod: "Срок страхования",
-      calculate: "Рассчитать",
-      result: "Сумма страховой премии:",
-      som: "сом",
-      tax: "включая 3% налог на продажу"
-    },
-    kg: {
-      title: "ОСАГО калькулятору",
-      description: "Камсыздандыруу наркын онлайн эсептеңиз",
-      vehicleType: "Унаанын түрү",
-      ageExperience: "Айдоочунун жашы жана стажы",
-      diagnosticCard: "Диагностикалык карта",
-      insurancePeriod: "Камсыздандыруу мөөнөтү",
-      calculate: "Эсептөө",
-      result: "Камсыздандыруу сыйлыгынын суммасы:",
-      som: "сом",
-      tax: "3% сатуу салыгын кошкондо"
-    }
-  };
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
   const t = translations[language];
 
-  const calculatePremium = () => {
+  const calculatePremium = async () => {
     const typeCoefficient = VEHICLE_COEFFICIENTS[vehicleType as keyof typeof VEHICLE_COEFFICIENTS].value;
     const ageExpCoefficient = AGE_EXPERIENCE_COEFFICIENTS[ageExperience as keyof typeof AGE_EXPERIENCE_COEFFICIENTS].value;
     const diagCardCoefficient = DIAGNOSTIC_CARD_COEFFICIENT[diagnosticCard as keyof typeof DIAGNOSTIC_CARD_COEFFICIENT].value;
@@ -60,6 +69,20 @@ export default function Calculator({ language }: CalculatorProps) {
     const finalPremium = basePremium + (basePremium * TAX_RATE);
 
     setPremium(Math.round(finalPremium));
+
+    try {
+      // Здесь будет логика отправки данных на сервер
+      // Пока просто имитируем успешную отправку
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Показываем уведомление об успехе
+      setToastType('success');
+      setShowToast(true);
+    } catch (error) {
+      // Показываем уведомление об ошибке
+      setToastType('error');
+      setShowToast(true);
+    }
   };
 
   return (
@@ -190,6 +213,13 @@ export default function Calculator({ language }: CalculatorProps) {
           </div>
         </div>
       </div>
+
+      <Toast
+        message={toastType === 'success' ? t.successMessage : t.errorMessage}
+        type={toastType}
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
     </section>
   );
 }
