@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Toast from './Toast';
 
 import {
@@ -78,7 +77,7 @@ export default function Calculator({ language }: CalculatorProps) {
       // Показываем уведомление об успехе
       setToastType('success');
       setShowToast(true);
-    } catch (error) {
+    } catch {
       // Показываем уведомление об ошибке
       setToastType('error');
       setShowToast(true);
